@@ -13,7 +13,7 @@ jobs:
     with:
       username: Mona
   update-gitops:
-    needs: build # Mettre ici le nom de votre job précédent (celui qui push sur GHCR)
+    #needs: build # Mettre ici le nom de votre job précédent (celui qui push sur GHCR)
     runs-on: ubuntu-latest
     steps:
       - name: Cloner le dépôt d'infrastructure
@@ -26,7 +26,7 @@ jobs:
       - name: Mettre à jour la version de l'image
         working-directory: ./infra-repo/dev
         run: |
-          kustomize edit set image spring-petclinic=ghcr.io/<VOTRE_USER_GITHUB>/spring-petclinic:${{ github.sha }}
+          kustomize edit set image spring-petclinic=ghcr.io/kmassinissa/spring-petclinic:${{ github.sha }}
 
       - name: Commit et Push vers le dépôt d'infrastructure
         working-directory: ./infra-repo
